@@ -1,20 +1,18 @@
 'use client';
 
-import Alert from "@/components/Alert";
-import Loader from "@/components/Loader";
-import MeetingRoom from "@/components/MeetingRoom";
-import MeetingSetup from "@/components/MeetingSetup";
-import { useGetCallById } from "@/hooks/useGetCallById";
-import { useUser } from "@clerk/nextjs";
-import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
-import { useParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from 'react';
+import { useUser } from '@clerk/nextjs';
+import { StreamCall, StreamTheme } from '@stream-io/video-react-sdk';
+import { useParams } from 'next/navigation';
+import { Loader } from 'lucide-react';
 
-type Props = {};
+import { useGetCallById } from '@/hooks/useGetCallById';
+import Alert from '@/components/Alert';
+import MeetingSetup from '@/components/MeetingSetup';
+import MeetingRoom from '@/components/MeetingRoom';
 
-const Meeting = ({params}: {params: {id: string}}) => {
-
-    const { id } = useParams();
+const MeetingPage = () => {
+  const { id } = useParams();
   const { isLoaded, user } = useUser();
   const { call, isCallLoading } = useGetCallById(id);
   const [isSetupComplete, setIsSetupComplete] = useState(false);
@@ -29,25 +27,23 @@ const Meeting = ({params}: {params: {id: string}}) => {
 
   // get more info about custom call type:  https://getstream.io/video/docs/react/guides/configuring-call-types/
   const notAllowed = call.type === 'invited' && (!user || !call.state.members.find((m) => m.user.id === user.id));
+
   if (notAllowed) return <Alert title="You are not allowed to join this meeting" />;
 
-
   return (
+    <main className="h-screen w-full">
+      <StreamCall call={call}>
+        <StreamTheme>
 
-  <main className="h-screen w-full">
-    <StreamCall call={call}>
-      <StreamTheme>
-        {!isSetupComplete ? (
+          {!isSetupComplete ? (
             <MeetingSetup setIsSetupComplete={setIsSetupComplete} />
-        ) : (
-          <MeetingRoom/>
-        )}
-      </StreamTheme>
-    </StreamCall>
-
-
-  </main>
-  )
+          ) : (
+            <MeetingRoom />
+          )}
+        </StreamTheme>
+      </StreamCall>
+    </main>
+  );
 };
 
-export default Meeting;
+export default MeetingPage;

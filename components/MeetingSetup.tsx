@@ -1,22 +1,26 @@
 'use client';
+import { useEffect, useState } from 'react';
+import {
+    DeviceSettings,
+    VideoPreview,
+    useCall,
+    useCallStateHooks,
+} from '@stream-io/video-react-sdk';
 
-import { DeviceSettings,VideoPreview, useCall, useCallStateHooks } from "@stream-io/video-react-sdk";
-import React, { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import Alert from "./Alert";
-
+import Alert from './Alert';
+import { Button } from './ui/button';
 
 const MeetingSetup = ({
     setIsSetupComplete,
 }: {
     setIsSetupComplete: (value: boolean) => void;
 }) => {
-
     // https://getstream.io/video/docs/react/guides/call-and-participant-state/#call-state
     const { useCallEndedAt, useCallStartsAt } = useCallStateHooks();
     const callStartsAt = useCallStartsAt();
     const callEndedAt = useCallEndedAt();
-    const callTimeNotArrived = callStartsAt && new Date(callStartsAt) > new Date();
+    const callTimeNotArrived =
+        callStartsAt && new Date(callStartsAt) > new Date();
     const callHasEnded = !!callEndedAt;
 
     const call = useCall();
@@ -32,14 +36,13 @@ const MeetingSetup = ({
 
     useEffect(() => {
         if (isMicCamToggled) {
-            call?.camera.disable();
-            call?.microphone.disable();
+            call.camera.disable();
+            call.microphone.disable();
         } else {
-             call?.camera.enable();
-            call?.microphone.enable();
+            call.camera.enable();
+            call.microphone.enable();
         }
-    }, [isMicCamToggled, call?.camera, call?.microphone]);
-
+    }, [isMicCamToggled, call.camera, call.microphone]);
 
     if (callTimeNotArrived)
         return (
@@ -55,7 +58,6 @@ const MeetingSetup = ({
                 iconUrl="/icons/call-ended.svg"
             />
         );
-
 
     return (
         <div className="flex h-screen w-full flex-col items-center justify-center gap-3 text-white">
@@ -82,7 +84,8 @@ const MeetingSetup = ({
             >
                 Join meeting
             </Button>
-        </div>);
+        </div>
+    );
 };
 
 export default MeetingSetup;
