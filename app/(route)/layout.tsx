@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout = ({ children }: { children: ReactNode }) => {
+    console.log(children);
     return (
     <main>  
         <StreamVideoProvider>
