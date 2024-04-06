@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 };
 
 const HomeLayout = ({ children }: { children: ReactNode }) => {
-    console.log(children);
     return (
         <main className="relative">
             <Navbar />
