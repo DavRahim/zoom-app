@@ -15,7 +15,7 @@ const Navbar = () => {
       alt="zoom-logo"
       className="max-sm:size-10"
       />
-      <p className="text-[26px] font-extrabold text-white max-sm:hidden">Zoom</p>
+      <p className="text-[26px] font-extrabold text-white max-sm:hidden">RS Live Class</p>
     </Link>
     <div className="flex-between gap-5">
       {/* Clerk - user management */}
