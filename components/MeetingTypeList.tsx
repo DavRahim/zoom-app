@@ -29,6 +29,8 @@ const MeetingTypeList = () => {
     link: ''
    });
 
+   console.log(values);
+
    const [callDetails, setCallDetails] = useState<Call>();
 
    const {toast} = useToast()
