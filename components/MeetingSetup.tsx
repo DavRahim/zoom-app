@@ -22,7 +22,7 @@ const MeetingSetup = ({
     const callTimeNotArrived =
         callStartsAt && new Date(callStartsAt) > new Date();
     const callHasEnded = !!callEndedAt;
-    console.log(callEndedAt);
+    // console.log(callEndedAt);
 
     const call = useCall();
 
