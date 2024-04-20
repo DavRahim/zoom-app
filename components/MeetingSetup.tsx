@@ -24,7 +24,6 @@ const MeetingSetup = ({
     const callHasEnded = !!callEndedAt;
     const call = useCall();
 console.log(call);
-console.log(call);
     if (!call) {
         throw new Error(
             'useStreamCall must be used within a StreamCall component.',
