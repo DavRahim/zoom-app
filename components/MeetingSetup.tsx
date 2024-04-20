@@ -23,7 +23,9 @@ const MeetingSetup = ({
         callStartsAt && new Date(callStartsAt) > new Date();
     const callHasEnded = !!callEndedAt;
     const call = useCall();
-
+console.log(call);
+console.log(call);
+console.log("i am a new console");
     if (!call) {
         throw new Error(
             'useStreamCall must be used within a StreamCall component.',
