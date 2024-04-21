@@ -13,7 +13,7 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
     const { endedCalls, upcomingCalls, callRecordings, isLoading } =
         useGetCalls();
     const [recordings, setRecordings] = useState<CallRecording[]>([]);
-
+ console.log(recordings);
     const getCalls = () => {
         switch (type) {
             case 'ended':
